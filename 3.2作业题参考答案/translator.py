@@ -24,7 +24,7 @@ def getClipboardText():
 
 def getTranslateResult(raw):
     """
-    即时代码出错，也要合理控制输出，给提示一个文案
+    即使代码出错，也要合理控制输出，给提示一个文案
     :param raw: 系统剪切板的内容直接
     :return:
     """
@@ -45,24 +45,7 @@ def getTranslateResult(raw):
             print(e)
     return result
 
-
-def showcommand():
-    global buttonStatus, labelText
-    buttonStatus = 1 if buttonStatus == 0  else 0
-    labelText.set("翻译服务已开启") if buttonStatus == 1 else labelText.set("翻译服务已关闭")
-    print("开关状态：", buttonStatus)
-
-def doTranslate():
-    """
-    读取开关的状态，来决定是否开启翻译服务。
-    如果开启了翻译服务，判断系统剪切板的内容与上次翻译的内容是否一致，如果没有发生变化，则不用再次进行翻译
-    """
-    global buttonStatus
-    if buttonStatus == 1 or True:
-        clipboardText = getClipboardText()
-        translateResult = getTranslateResult(clipboardText)
-        print(translateResult)
-
+# 制作GUI 有时候复制了内容却不想去进行翻译，就可以使用开关关掉翻译
 class App:
     def __init__(self):
         self.root = tkinter.Tk()
@@ -102,7 +85,7 @@ class App:
         self.root.after(1000, self.update_clock)
         self.doTranslate()
 
-# 制作GUI 有时候复制了内容却不想去进行翻译，就可以使用开关关掉翻译
+# 程序入口
 if __name__ == "__main__":
     app = App()
     app.start()
